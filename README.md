@@ -20,3 +20,5 @@ https://SkinAnalyzerServices-cms-api-cn-latest.dev.pcf.mkc.io/swagger-ui.html#!/
 1. git github 
 2. UI 卡片
 
+rename gitRep name
+
