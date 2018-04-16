@@ -12,7 +12,11 @@ https://SkinAnalyzerServices-cms-api-cn-latest.dev.pcf.mkc.io/swagger-ui.html#!/
 3. UAT:    https://SkinAnalyzerServices-cms-api-cn-latest.uat.pcf.mkc.io  
 4. PROD:   https://SkinAnalyzerServices-cms-api-cn-latest.prod.pcf.mkc.io  
 
-## TODO
+## TODO-webapi
+1. 用户头像/相册上传
+2. 用户充值支付/服务购买
+
+## TODO-android
 1. git github 
 2. UI 卡片
 
