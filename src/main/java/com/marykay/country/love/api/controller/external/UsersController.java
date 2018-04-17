@@ -75,7 +75,7 @@ public class UsersController {
 	 * @throws IOException
 	 */
 	@ApiOperation(value = "modifying user information", notes = "modifying user information")
-	@RequestMapping(value = { "/v1/users/information" }, method = RequestMethod.PUT)
+	@RequestMapping(value = { "/v1/users/information" }, method = RequestMethod.POST)
 	public BaseResult userUpdate(// @RequestParam(value = "image_file", required
 									// = false) MultipartFile file,
 			@RequestBody UpdateUserRequest updateUserRequest) throws IOException {
@@ -148,7 +148,7 @@ public class UsersController {
 	 * @param changePasswordRequest
 	 */
 	@ApiOperation(value = "change password", notes = "change password")
-	@RequestMapping(value = { "/v1/users/changePassword" }, method = RequestMethod.PUT)
+	@RequestMapping(value = { "/v1/users/changePassword" }, method = RequestMethod.POST)
 	public BaseResult changePassword(@Valid ChangePasswordRequest changePasswordRequest) {
 
 		BaseResult result = new BaseResult();
@@ -182,7 +182,7 @@ public class UsersController {
 	 * @param changeMobileRequest
 	 */
 	@ApiOperation(value = "change phone", notes = "change phone")
-	@RequestMapping(value = { "/v1/users/changePhone" }, method = RequestMethod.PUT)
+	@RequestMapping(value = { "/v1/users/changePhone" }, method = RequestMethod.POST)
 	public BaseResult changePhone(@Valid ChangeMobileRequest changeMobileRequest) {
 
 		BaseResult result = new BaseResult();
