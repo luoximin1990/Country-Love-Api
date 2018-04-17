@@ -14,6 +14,8 @@ public class GetUserListRequest {
 
 	private String address;
 
+	private String sex;
+
 	public Integer getPageNo() {
 		return pageNo;
 	}
@@ -36,6 +38,14 @@ public class GetUserListRequest {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 }

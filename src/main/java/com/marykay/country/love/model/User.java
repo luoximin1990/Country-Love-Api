@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 
 import java.util.Date;
 
@@ -19,7 +18,6 @@ public class User {
 	// 姓名
 	private String userName;
 	// 性别
-	@Max(value = 2, message = "性别：1 男，2 女")
 	private String sex;
 	// 手机号
 	private String mobile;

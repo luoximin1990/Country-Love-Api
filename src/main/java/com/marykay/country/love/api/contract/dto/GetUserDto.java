@@ -1,7 +1,5 @@
 package com.marykay.country.love.api.contract.dto;
 
-import javax.validation.constraints.Max;
-
 import java.util.Date;
 
 public class GetUserDto {
@@ -10,7 +8,6 @@ public class GetUserDto {
 
     private String name;
 
-    @Max(value= 2,message = "性别：1 男，2 女")
     private String sex;
 
     private String mobile;

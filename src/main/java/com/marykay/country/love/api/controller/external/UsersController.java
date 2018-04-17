@@ -259,13 +259,13 @@ public class UsersController {
 	 */
 	@ApiOperation(value = "getting dashboard users", notes = "getting dashboard users")
 	@RequestMapping(value = "/v1/users/query", method = RequestMethod.GET)
-	public GetUserListResponse getUsers(@Valid GetUserListRequest getUserListRequest, @PathVariable String sex) {
+	public GetUserListResponse getUsers(@Valid GetUserListRequest getUserListRequest) {
 
 		GetUserListResponse getUserResponse = new GetUserListResponse();
 
 		PageDto<GetUserDto> users = userService.getUsersPage(getUserListRequest.getPageNo(),
 
-				getUserListRequest.getPageSize(), getUserListRequest.getAddress(), sex);
+				getUserListRequest.getPageSize(), getUserListRequest.getAddress(), getUserListRequest.getSex());
 		getUserResponse.pageNo = users.getPageNo();
 		getUserResponse.pageSize = users.getPageSize();
 		getUserResponse.totalCount = users.getTotalSize();
