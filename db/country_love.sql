@@ -60,17 +60,17 @@ CREATE TABLE `j_position_city` (
   KEY `province_id` (`province_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=346 DEFAULT CHARSET=utf8 COMMENT='县级市数据库';
 
-CREATE TABLE `j_position_county` (
+CREATE TABLE `j_position_country` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '地级市主键ID',
   `city_id` bigint(20) unsigned NOT NULL COMMENT '地级市id',
   `country_id` bigint(20) unsigned NOT NULL COMMENT '县级id',
-  `county_name` char(64) NOT NULL,
+  `country_name` char(64) NOT NULL,
   `created_by` varchar(255) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `county_id` (`country_id`),
+  UNIQUE KEY `country_id` (`country_id`),
   KEY `city_id` (`city_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2857 DEFAULT CHARSET=utf8 COMMENT='地区市数据库';
 
@@ -86,7 +86,7 @@ CREATE TABLE `j_position_town` (
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `town_id` (`town_id`),
-  KEY `county_id` (`country_id`)
+  KEY `country_id` (`country_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=43855 DEFAULT CHARSET=utf8 COMMENT='镇数据库';
 
 CREATE TABLE `j_position_village` (
