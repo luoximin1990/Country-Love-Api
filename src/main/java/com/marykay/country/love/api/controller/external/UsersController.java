@@ -87,7 +87,7 @@ public class UsersController {
 		// uploadCommon.uploadImageCom(file, request, fileDto);
 
 		BaseResult result = new BaseResult();
-		
+
 		User user = new User();
 		user.setId(updateUserRequest.getId());
 		user.setUserName(updateUserRequest.getName());
@@ -241,11 +241,13 @@ public class UsersController {
 		GetUserListResponse getUserResponse = new GetUserListResponse();
 
 		PageDto<GetUserDto> users = userService.getUsersPage(getUserListRequest.getPageNo(),
-				getUserListRequest.getPageSize(), getUserListRequest.getAddress(), sex);
+
+		getUserListRequest.getPageSize(), getUserListRequest.getAddress(), sex);
 		getUserResponse.pageNo = users.getPageNo();
 		getUserResponse.pageSize = users.getPageSize();
 		getUserResponse.totalCount = users.getTotalSize();
 		getUserResponse.setGetUserDtoList(users.getContent());
+
 		return getUserResponse;
 	}
 }

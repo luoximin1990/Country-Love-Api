@@ -37,7 +37,7 @@ public class PositionController {
 	private PositionService positionService;
 
 	/**
-	 * 获取所有省，直辖市信息
+	 * 1-获取所有省，直辖市信息
 	 *
 	 */
 	@ApiOperation(value = "getting all provice", notes = "getting all provice")
@@ -51,7 +51,7 @@ public class PositionController {
 	}
 
 	/**
-	 * 根据省，直辖市ID，获取所有城市信息
+	 * 2-根据省，直辖市ID，获取所有城市信息
 	 *
 	 */
 	@ApiOperation(value = "getting all cities in provice", notes = "getting all cities in provice")
@@ -65,7 +65,7 @@ public class PositionController {
 	}
 
 	/**
-	 * 根据城市ID，获取所有地区信息
+	 * 3-根据城市ID，获取所有地区信息
 	 *
 	 */
 	@ApiOperation(value = "getting all countries in city", notes = "getting all countries in city")
@@ -79,7 +79,7 @@ public class PositionController {
 	}
 
 	/**
-	 * 根据地区ID，获取所有乡镇信息
+	 * 4-根据地区ID，获取所有乡镇信息
 	 *
 	 */
 	@ApiOperation(value = "getting all towns in country", notes = "getting all towns in country")
@@ -93,7 +93,7 @@ public class PositionController {
 	}
 
 	/**
-	 * 根据乡镇ID，获取所有村信息
+	 * 5-根据乡镇ID，获取所有村信息
 	 *
 	 */
 	@ApiOperation(value = "getting all villages in town", notes = "getting all villages in town")
