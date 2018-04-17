@@ -76,7 +76,8 @@ public class UsersController {
 	 */
 	@ApiOperation(value = "modifying user information", notes = "modifying user information")
 	@RequestMapping(value = { "/v1/users/information" }, method = RequestMethod.PUT)
-	public BaseResult userUpdate(// @RequestParam(value = "image_file", required = false) MultipartFile file,
+	public BaseResult userUpdate(// @RequestParam(value = "image_file", required
+									// = false) MultipartFile file,
 			@RequestBody UpdateUserRequest updateUserRequest) throws IOException {
 
 		UploadCommon uploadCommon = UploadCommon.getUploadCommonInstance();
@@ -86,6 +87,7 @@ public class UsersController {
 		// uploadCommon.uploadImageCom(file, request, fileDto);
 
 		BaseResult result = new BaseResult();
+		
 		User user = new User();
 		user.setId(updateUserRequest.getId());
 		user.setUserName(updateUserRequest.getName());

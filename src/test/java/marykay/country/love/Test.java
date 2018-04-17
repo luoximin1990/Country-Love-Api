@@ -48,7 +48,7 @@ public class Test {
 		// 使用post提交
 		request.setMethod(MethodType.POST);
 		// 必填:待发送手机号
-		request.setPhoneNumbers("15821941983");
+		request.setPhoneNumbers("17702136954");
 		// 必填:短信签名-可在短信控制台中找到
 		request.setSignName("乡村爱情");
 		// 必填:短信模板-可在短信控制台中找到
@@ -87,7 +87,7 @@ public class Test {
 		// 组装请求对象
 		QuerySendDetailsRequest request = new QuerySendDetailsRequest();
 		// 必填-号码
-		request.setPhoneNumber("15821941983");
+		request.setPhoneNumber("17702136954");
 		// 可选-流水号
 		request.setBizId(bizId);
 		// 必填-发送日期 支持30天内记录查询，格式yyyyMMdd

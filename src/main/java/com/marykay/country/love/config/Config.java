@@ -42,6 +42,7 @@ public class Config {
         instance.S3_Url=loadEnv("S3_Url","http://community-aws-storage-core-internal-api-latest.dev.pcf-internal.mkc.io/v1/s3/");
         instance.S3_ClientID=loadEnv("S3_ClientID","265E00C3-AA98-40A2-AF99-9470ACC0C9D4");
         instance.Product_Url=loadEnv("Product_Url","https://services.ebz-chn-dev.mkaws.com/");
+        
         return instance;
     }
 
