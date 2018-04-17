@@ -8,16 +8,16 @@ import javax.persistence.Table;
 
 import java.util.Date;
 
-@Entity(name = "j_position_provice")
-@Table(name = "j_position_provice")
-public class Provice {
+@Entity(name = "j_position_province")
+@Table(name = "j_position_province")
+public class Province {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	// 省份编号
-	private int proviceId;
+	private int provinceId;
 	// 省份名称
-	private String proviceName;
+	private String provinceName;
 	// 创建者
 	private String createdBy;
 	// 创建时间
@@ -35,20 +35,20 @@ public class Provice {
 		this.id = id;
 	}
 
-	public int getProviceId() {
-		return proviceId;
+	public int getProvinceId() {
+		return provinceId;
 	}
 
-	public void setProviceId(int proviceId) {
-		this.proviceId = proviceId;
+	public void setProvinceId(int provinceId) {
+		this.provinceId = provinceId;
 	}
 
-	public String getProviceName() {
-		return proviceName;
+	public String getProvinceName() {
+		return provinceName;
 	}
 
-	public void setProviceName(String proviceName) {
-		this.proviceName = proviceName;
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
 	}
 
 	public String getCreatedBy() {

@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.marykay.country.love.api.contract.dto.GetCityDto;
 import com.marykay.country.love.api.contract.dto.GetCountryDto;
-import com.marykay.country.love.api.contract.dto.GetProviceDto;
+import com.marykay.country.love.api.contract.dto.GetProvinceDto;
 import com.marykay.country.love.api.contract.dto.GetTownDto;
 import com.marykay.country.love.api.contract.dto.GetVillageDto;
 import com.marykay.country.love.api.contract.response.GetCityResponse;
 import com.marykay.country.love.api.contract.response.GetCountryResponse;
-import com.marykay.country.love.api.contract.response.GetProviceResponse;
+import com.marykay.country.love.api.contract.response.GetProvinceResponse;
 import com.marykay.country.love.api.contract.response.GetTownResponse;
 import com.marykay.country.love.api.contract.response.GetVillageResponse;
 import com.marykay.country.love.service.PositionService;
@@ -40,28 +40,28 @@ public class PositionController {
 	 * 1-获取所有省，直辖市信息
 	 *
 	 */
-	@ApiOperation(value = "getting all provice", notes = "getting all provice")
-	@RequestMapping(value = "/v1/positions/provices", method = RequestMethod.GET)
-	public GetProviceResponse proviceAll() {
+	@ApiOperation(value = "getting all province", notes = "getting all province")
+	@RequestMapping(value = "/v1/positions/provinces", method = RequestMethod.GET)
+	public GetProvinceResponse provinceAll() {
 
-		GetProviceResponse getProviceResponse = new GetProviceResponse();
-		List<GetProviceDto> proviceAll = positionService.getAllProvice();
-		getProviceResponse.setGetProviceDto(proviceAll);
-		return getProviceResponse;
+		GetProvinceResponse getProvinceResponse = new GetProvinceResponse();
+		List<GetProvinceDto> provinceAll = positionService.getAllProvince();
+		getProvinceResponse.setGetProvinceDto(provinceAll);
+		return getProvinceResponse;
 	}
 
 	/**
 	 * 2-根据省，直辖市ID，获取所有城市信息
 	 *
 	 */
-	@ApiOperation(value = "getting all cities in provice", notes = "getting all cities in provice")
-	@RequestMapping(value = "/v1/positions/{proviceId}/cities", method = RequestMethod.GET)
-	public GetCityResponse cityAll(@PathVariable Integer proviceId) {
+	@ApiOperation(value = "getting all cities in province", notes = "getting all cities in province")
+	@RequestMapping(value = "/v1/positions/{provinceId}/cities", method = RequestMethod.GET)
+	public GetCityResponse cityAll(@PathVariable Integer provinceId) {
 
-		GetCityResponse getProviceResponse = new GetCityResponse();
-		List<GetCityDto> cityAll = positionService.getAllCity(proviceId);
-		getProviceResponse.setGetCityDto(cityAll);
-		return getProviceResponse;
+		GetCityResponse getProvinceResponse = new GetCityResponse();
+		List<GetCityDto> cityAll = positionService.getAllCity(provinceId);
+		getProvinceResponse.setGetCityDto(cityAll);
+		return getProvinceResponse;
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class PositionController {
 	 *
 	 */
 	@ApiOperation(value = "getting all countries in city", notes = "getting all countries in city")
-	@RequestMapping(value = "/v1/positions/provices/{cityId}/countries", method = RequestMethod.GET)
+	@RequestMapping(value = "/v1/positions/provinces/{cityId}/countries", method = RequestMethod.GET)
 	public GetCountryResponse countryAll(@PathVariable long cityId) {
 
 		GetCountryResponse getCountryResponse = new GetCountryResponse();
@@ -83,7 +83,7 @@ public class PositionController {
 	 *
 	 */
 	@ApiOperation(value = "getting all towns in country", notes = "getting all towns in country")
-	@RequestMapping(value = "/v1/positions/provices/city/{countryId}/towns", method = RequestMethod.GET)
+	@RequestMapping(value = "/v1/positions/provinces/city/{countryId}/towns", method = RequestMethod.GET)
 	public GetTownResponse townAll(@PathVariable long countryId) {
 
 		GetTownResponse getTownResponse = new GetTownResponse();
@@ -97,7 +97,7 @@ public class PositionController {
 	 *
 	 */
 	@ApiOperation(value = "getting all villages in town", notes = "getting all villages in town")
-	@RequestMapping(value = "/v1/positions/provices/city/country/{townId}/villages", method = RequestMethod.GET)
+	@RequestMapping(value = "/v1/positions/provinces/city/country/{townId}/villages", method = RequestMethod.GET)
 	public GetVillageResponse villageAll(@PathVariable long townId) {
 
 		GetVillageResponse getVillageResponse = new GetVillageResponse();

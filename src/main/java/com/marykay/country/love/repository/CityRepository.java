@@ -10,5 +10,5 @@ import com.marykay.country.love.model.City;
 @Repository
 public interface CityRepository extends JpaRepository<City, Integer> {
 
-	List<City> findByProviceId(int proviceId);
+	List<City> findByProvinceId(int provinceId);
 }

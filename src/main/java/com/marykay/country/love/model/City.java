@@ -15,7 +15,7 @@ public class City {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	// 省份编号
-	private int proviceId;
+	private int provinceId;
 	// 城市ID
 	private long cityId;
 	// 城市名称
@@ -34,11 +34,11 @@ public class City {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getProviceId() {
-		return proviceId;
+	public int getProvinceId() {
+		return provinceId;
 	}
-	public void setProviceId(int proviceId) {
-		this.proviceId = proviceId;
+	public void setProvinceId(int provinceId) {
+		this.provinceId = provinceId;
 	}
 	public long getCityId() {
 		return cityId;

@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 
 import com.marykay.country.love.api.contract.dto.GetCityDto;
 import com.marykay.country.love.api.contract.dto.GetCountryDto;
-import com.marykay.country.love.api.contract.dto.GetProviceDto;
+import com.marykay.country.love.api.contract.dto.GetProvinceDto;
 import com.marykay.country.love.api.contract.dto.GetTownDto;
 import com.marykay.country.love.api.contract.dto.GetVillageDto;
 import com.marykay.country.love.model.City;
 import com.marykay.country.love.model.Country;
-import com.marykay.country.love.model.Provice;
+import com.marykay.country.love.model.Province;
 import com.marykay.country.love.model.Town;
 import com.marykay.country.love.model.Village;
 import com.marykay.country.love.repository.CityRepository;
 import com.marykay.country.love.repository.CountryRepository;
-import com.marykay.country.love.repository.ProviceRepository;
+import com.marykay.country.love.repository.ProvinceRepository;
 import com.marykay.country.love.repository.TownRepository;
 import com.marykay.country.love.repository.VillageRepository;
 import com.marykay.country.love.service.PositionService;
@@ -27,7 +27,7 @@ import com.marykay.country.love.service.PositionService;
 public class PositionServiceImpl implements PositionService {
 
 	@Autowired
-	ProviceRepository proviceRepository;
+	ProvinceRepository provinceRepository;
 	@Autowired
 	CityRepository cityRepository;
 	@Autowired
@@ -38,25 +38,25 @@ public class PositionServiceImpl implements PositionService {
 	VillageRepository villageRepository;
 
 	@Override
-	public List<GetProviceDto> getAllProvice() {
+	public List<GetProvinceDto> getAllProvince() {
 
-		List<GetProviceDto> getProviceDtoList = new ArrayList<>();
-		List<Provice> proviceAll = proviceRepository.findAll();
-		GetProviceDto getProviceDto = null;
-		for (int i = 0; i < proviceAll.size(); i++) {
-			getProviceDto = new GetProviceDto();
-			getProviceDto.setProviceId(proviceAll.get(i).getProviceId());
-			getProviceDto.setProviceName(proviceAll.get(i).getProviceName());
-			getProviceDtoList.add(getProviceDto);
+		List<GetProvinceDto> getProvinceDtoList = new ArrayList<>();
+		List<Province> provinceAll = provinceRepository.findAll();
+		GetProvinceDto getProvinceDto = null;
+		for (int i = 0; i < provinceAll.size(); i++) {
+			getProvinceDto = new GetProvinceDto();
+			getProvinceDto.setProvinceId(provinceAll.get(i).getProvinceId());
+			getProvinceDto.setProvinceName(provinceAll.get(i).getProvinceName());
+			getProvinceDtoList.add(getProvinceDto);
 		}
 
-		return getProviceDtoList;
+		return getProvinceDtoList;
 	}
 
 	@Override
-	public List<GetCityDto> getAllCity(Integer proviceId) {
+	public List<GetCityDto> getAllCity(Integer provinceId) {
 		List<GetCityDto> getCityDtoList = new ArrayList<>();
-		List<City> cityAll = cityRepository.findByProviceId(proviceId);
+		List<City> cityAll = cityRepository.findByProvinceId(provinceId);
 		GetCityDto getCityDto = null;
 		for (int i = 0; i < cityAll.size(); i++) {
 			getCityDto = new GetCityDto();
