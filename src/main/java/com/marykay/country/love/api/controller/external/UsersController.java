@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.marykay.country.love.api.contract.dto.BaseResult;
 import com.marykay.country.love.api.contract.dto.FileDto;
 import com.marykay.country.love.api.contract.dto.GetUserDto;
@@ -19,10 +20,14 @@ import com.marykay.country.love.api.contract.request.ChangePasswordRequest;
 import com.marykay.country.love.api.contract.request.GetUserListRequest;
 import com.marykay.country.love.api.contract.request.GetUserLoginRequest;
 import com.marykay.country.love.api.contract.request.UpdateUserRequest;
+import com.marykay.country.love.api.contract.response.AddPhoneCodeResponse;
 import com.marykay.country.love.api.contract.response.GetUserListResponse;
 import com.marykay.country.love.api.contract.response.GetUserResponse;
+import com.marykay.country.love.api.contract.response.SendSmsResponse;
+import com.marykay.country.love.model.PhoneCode;
 import com.marykay.country.love.model.User;
 import com.marykay.country.love.service.UserService;
+import com.marykay.country.love.util.SmsUtil;
 import com.marykay.country.love.util.UploadCommon;
 
 import java.io.IOException;
@@ -65,6 +70,24 @@ public class UsersController {
 		result.setContent(users);
 		result.setMsg("注册成功!");
 		return result;
+	}
+
+	/**
+	 * 获取验证码
+	 * 
+	 * @param addPhoneCodeRequest
+	 * @throws ClientException
+	 */
+	@ApiOperation(value = "registered user", notes = "registered user")
+	@RequestMapping(value = "/v1/{mobile}/phoneCode", method = RequestMethod.POST)
+	public AddPhoneCodeResponse getPhoneCode(@PathVariable String mobile) throws ClientException {
+
+		AddPhoneCodeResponse response = new AddPhoneCodeResponse();
+		// 发短信
+		SendSmsResponse sendSmsResponse = SmsUtil.sendSms(mobile);
+		PhoneCode phoneCode = userService.addPhoneCode(mobile, sendSmsResponse.getPhoneCode());
+		response.setCode(phoneCode.getCode());
+		return response;
 	}
 
 	/**
@@ -242,7 +265,7 @@ public class UsersController {
 
 		PageDto<GetUserDto> users = userService.getUsersPage(getUserListRequest.getPageNo(),
 
-		getUserListRequest.getPageSize(), getUserListRequest.getAddress(), sex);
+				getUserListRequest.getPageSize(), getUserListRequest.getAddress(), sex);
 		getUserResponse.pageNo = users.getPageNo();
 		getUserResponse.pageSize = users.getPageSize();
 		getUserResponse.totalCount = users.getTotalSize();

@@ -20,7 +20,9 @@ import com.marykay.country.love.api.contract.dto.GetUserDto;
 import com.marykay.country.love.api.contract.dto.PageDto;
 import com.marykay.country.love.api.contract.request.AddUserRequest;
 import com.marykay.country.love.api.contract.response.GetUserResponse;
+import com.marykay.country.love.model.PhoneCode;
 import com.marykay.country.love.model.User;
+import com.marykay.country.love.repository.PhoneCodeRepository;
 import com.marykay.country.love.repository.UserRepository;
 import com.marykay.country.love.service.UserService;
 
@@ -29,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	PhoneCodeRepository phoneCodeRepository;
 
 	@Override
 	public User findByMobile(String mobile) {
@@ -87,6 +92,15 @@ public class UserServiceImpl implements UserService {
 		user.setNewPassword(addUserRequest.getPassword());
 		userRepository.save(user);
 		return user;
+	}
+
+	@Override
+	public PhoneCode addPhoneCode(String mobile, int code) {
+		PhoneCode phoneCode = new PhoneCode();
+		phoneCode.setMobile(mobile);
+		phoneCode.setCode(code);
+		phoneCodeRepository.save(phoneCode);
+		return phoneCode;
 	}
 
 	@Override

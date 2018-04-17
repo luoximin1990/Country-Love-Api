@@ -4,6 +4,7 @@ import com.marykay.country.love.api.contract.dto.GetUserDto;
 import com.marykay.country.love.api.contract.dto.PageDto;
 import com.marykay.country.love.api.contract.request.AddUserRequest;
 import com.marykay.country.love.api.contract.response.GetUserResponse;
+import com.marykay.country.love.model.PhoneCode;
 import com.marykay.country.love.model.User;
 
 public interface UserService {
@@ -25,6 +26,16 @@ public interface UserService {
 	 *            :手机号
 	 */
 	User add(AddUserRequest addUserRequest);
+
+	/**
+	 * 获取验证码
+	 * 
+	 * @param mobile
+	 *            :手机号
+	 *@param code
+	 *            :验证码
+	 */
+	PhoneCode addPhoneCode(String mobile, int code);
 
 	/**
 	 * 获取用户详细信息

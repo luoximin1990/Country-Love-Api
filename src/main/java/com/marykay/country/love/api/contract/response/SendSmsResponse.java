@@ -33,6 +33,8 @@ public class SendSmsResponse extends AcsResponse {
 
 	private String code;
 
+	private int phoneCode;
+
 	private String message;
 
 	public String getRequestId() {
@@ -57,6 +59,14 @@ public class SendSmsResponse extends AcsResponse {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public int getPhoneCode() {
+		return phoneCode;
+	}
+
+	public void setPhoneCode(int phoneCode) {
+		this.phoneCode = phoneCode;
 	}
 
 	public String getMessage() {
