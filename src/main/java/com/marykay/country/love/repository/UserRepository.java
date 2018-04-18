@@ -36,15 +36,23 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Transactional
 	@Modifying
-	@Query("UPDATE user t SET t.userName = :userName,t.sex = :sex,t.birthday = :birthday,t.signin = :signin,t.remark = :remark,t.newAddress = :newAddress,t.oldAddress = :oldAddress,t.photo = :photo,t.maritalStatus = :maritalStatus,t.createdBy = :createdBy, t.createdDate = :createdDate, t.updatedBy = :updatedBy, t.updatedDate = :updatedDate WHERE t.id=:id ")
+	@Query("UPDATE user t SET t.userName = :userName,t.sex = :sex,t.birthday = :birthday,t.signin = :signin,t.remark = :remark,t.newAddress = :newAddress,t.oldAddress = :oldAddress,t.maritalStatus = :maritalStatus,t.createdBy = :createdBy, t.createdDate = :createdDate, t.updatedBy = :updatedBy, t.updatedDate = :updatedDate WHERE t.id=:id ")
 	int updateUser(@Param("id") int id, @Param("userName") String userName, @Param("sex") String sex,
 			@Param("birthday") String birthday, @Param("signin") String signin, @Param("remark") String remark,
 			@Param("newAddress") String newAddress, @Param("oldAddress") String oldAddress,
-			@Param("photo") String photo, @Param("maritalStatus") int maritalStatus,
-			@Param("createdBy") String createdBy, @Param("createdDate") Date createdDate,
-			@Param("updatedBy") String updatedBy, @Param("updatedDate") Date updatedDate);
+			@Param("maritalStatus") int maritalStatus, @Param("createdBy") String createdBy,
+			@Param("createdDate") Date createdDate, @Param("updatedBy") String updatedBy,
+			@Param("updatedDate") Date updatedDate);
 
-//	@Query("select new com.marykay.country.love.model.User(u.id, u.userName) from user u where u.set = :sex limit 10")
-//	Page<User> selectUsers(@Param("sex") String sex, Pageable pageable);
+	@Transactional
+	@Modifying
+	@Query("UPDATE user t SET t.photo = :photo,t.createdBy = :createdBy, t.createdDate = :createdDate, t.updatedBy = :updatedBy, t.updatedDate = :updatedDate WHERE t.id=:id ")
+	int updateUserPhoto(@Param("id") int id, @Param("photo") String photo, @Param("createdBy") String createdBy,
+			@Param("createdDate") Date createdDate, @Param("updatedBy") String updatedBy,
+			@Param("updatedDate") Date updatedDate);
+
+	// @Query("select new com.marykay.country.love.model.User(u.id, u.userName) from
+	// user u where u.set = :sex limit 10")
+	// Page<User> selectUsers(@Param("sex") String sex, Pageable pageable);
 	Page<User> findAll(Specification<User> spec, Pageable pageable);
 }

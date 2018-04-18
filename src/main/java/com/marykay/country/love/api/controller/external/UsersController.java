@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.aliyuncs.exceptions.ClientException;
 import com.marykay.country.love.api.contract.dto.BaseResult;
@@ -21,6 +23,7 @@ import com.marykay.country.love.api.contract.request.CheckPhoneCodeRequest;
 import com.marykay.country.love.api.contract.request.GetUserListRequest;
 import com.marykay.country.love.api.contract.request.GetUserLoginRequest;
 import com.marykay.country.love.api.contract.request.UpdateUserRequest;
+import com.marykay.country.love.api.contract.request.UploadUserRequest;
 import com.marykay.country.love.api.contract.response.AddPhoneCodeResponse;
 import com.marykay.country.love.api.contract.response.CheckPhoneCodeResponse;
 import com.marykay.country.love.api.contract.response.GetUserListResponse;
@@ -116,15 +119,7 @@ public class UsersController {
 	 */
 	@ApiOperation(value = "modifying user information", notes = "modifying user information")
 	@RequestMapping(value = { "/v1/users/information" }, method = RequestMethod.POST)
-	public BaseResult userUpdate(// @RequestParam(value = "image_file", required
-									// = false) MultipartFile file,
-			@RequestBody UpdateUserRequest updateUserRequest) throws IOException {
-
-		UploadCommon uploadCommon = UploadCommon.getUploadCommonInstance();
-		FileDto fileDto = new FileDto();
-
-		// TODO
-		// uploadCommon.uploadImageCom(file, request, fileDto);
+	public BaseResult userUpdate(@RequestBody UpdateUserRequest updateUserRequest) throws IOException {
 
 		BaseResult result = new BaseResult();
 
@@ -137,9 +132,6 @@ public class UsersController {
 		user.setRemark(updateUserRequest.getRemark());
 		user.setNewAddress(updateUserRequest.getNewAddress());
 		user.setOldAddress(updateUserRequest.getOldAddress());
-		// TODO
-		// user.setPhoto(fileDto.getFile_url());
-		user.setPhoto("12312");
 		user.setMaritalStatus(updateUserRequest.getMaritalStatus());
 		user.setCreatedBy(String.valueOf(updateUserRequest.getId()));
 		user.setCreatedDate(new Date());
@@ -147,6 +139,43 @@ public class UsersController {
 		user.setUpdatedDate(new Date());
 
 		if (userService.updateUser(user)) {
+			result.setCode(0);
+			result.setMsg("修改成功");
+			return result;
+		}
+		result.setCode(-1);
+		result.setMsg("修改失败");
+		return result;
+	}
+
+	/**
+	 * 上传图片
+	 * 
+	 * @param file
+	 * @param uploadUserRequest
+	 * @throws IOException
+	 */
+	@ApiOperation(value = "upload users photo", notes = "upload users photo")
+	@RequestMapping(value = { "/v1/users/uploadPhoto" }, method = RequestMethod.POST)
+	public BaseResult photoUpload(@RequestParam(value = "image_file", required = false) MultipartFile file,
+			@Valid UploadUserRequest uploadUserRequest) throws IOException {
+
+		UploadCommon uploadCommon = UploadCommon.getUploadCommonInstance();
+		FileDto fileDto = new FileDto();
+
+		uploadCommon.uploadImageCom(file, request, fileDto);
+
+		BaseResult result = new BaseResult();
+
+		User user = new User();
+		user.setId(uploadUserRequest.getId());
+		user.setPhoto(fileDto.getFile_url());
+		user.setCreatedBy(String.valueOf(uploadUserRequest.getId()));
+		user.setCreatedDate(new Date());
+		user.setUpdatedBy(String.valueOf(uploadUserRequest.getId()));
+		user.setUpdatedDate(new Date());
+
+		if (userService.upload(user)) {
 			result.setCode(0);
 			result.setMsg("修改成功");
 			return result;

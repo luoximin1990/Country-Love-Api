@@ -78,12 +78,19 @@ public interface UserService {
 	boolean updateUser(User user);
 
 	/**
+	 * 上传图片
+	 * 
+	 * @param user
+	 *            :用户信息
+	 */
+	boolean upload(User user);
+
+	/**
 	 * 查看该用户的课程是否学习结束
-	 * 1,如果证书表中的courseStatus,examStatus都为1,则该课程已经学习结束
-	 * 2,如果证书表中的courseStatus,examStatus都为0,则查询课程视频是否都学习过。
-	 * @param level
-	 * @param contactId
-	 * @return true 完成、false 未完成
+	 * 
+	 * @param mobile
+	 * @param code
+	 * @return true 验证通过、false 未通过
 	 */
 	boolean getPhoneCode(String mobile, int code);
 

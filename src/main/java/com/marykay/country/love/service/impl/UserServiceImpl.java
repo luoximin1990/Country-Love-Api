@@ -9,11 +9,9 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -53,9 +51,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean updateUser(User user) {
 		return userRepository.updateUser(user.getId(), user.getUserName(), user.getSex(), user.getBirthday(),
-				user.getSignin(), user.getRemark(), user.getNewAddress(), user.getOldAddress(), user.getPhoto(),
-				user.getMaritalStatus(), user.getCreatedBy(), user.getCreatedDate(), user.getUpdatedBy(),
-				user.getUpdatedDate()) > 0;
+				user.getSignin(), user.getRemark(), user.getNewAddress(), user.getOldAddress(), user.getMaritalStatus(),
+				user.getCreatedBy(), user.getCreatedDate(), user.getUpdatedBy(), user.getUpdatedDate()) > 0;
+	}
+
+	@Override
+	public boolean upload(User user) {
+		return userRepository.updateUserPhoto(user.getId(), user.getPhoto(), user.getCreatedBy(), user.getCreatedDate(),
+				user.getUpdatedBy(), user.getUpdatedDate()) > 0;
 	}
 
 	@Override
@@ -172,5 +175,4 @@ public class UserServiceImpl implements UserService {
 			}
 		};
 	}
-
 }
