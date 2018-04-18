@@ -17,10 +17,12 @@ import com.marykay.country.love.api.contract.dto.PageDto;
 import com.marykay.country.love.api.contract.request.AddUserRequest;
 import com.marykay.country.love.api.contract.request.ChangeMobileRequest;
 import com.marykay.country.love.api.contract.request.ChangePasswordRequest;
+import com.marykay.country.love.api.contract.request.CheckPhoneCodeRequest;
 import com.marykay.country.love.api.contract.request.GetUserListRequest;
 import com.marykay.country.love.api.contract.request.GetUserLoginRequest;
 import com.marykay.country.love.api.contract.request.UpdateUserRequest;
 import com.marykay.country.love.api.contract.response.AddPhoneCodeResponse;
+import com.marykay.country.love.api.contract.response.CheckPhoneCodeResponse;
 import com.marykay.country.love.api.contract.response.GetUserListResponse;
 import com.marykay.country.love.api.contract.response.GetUserResponse;
 import com.marykay.country.love.api.contract.response.SendSmsResponse;
@@ -75,10 +77,10 @@ public class UsersController {
 	/**
 	 * 获取验证码
 	 * 
-	 * @param addPhoneCodeRequest
+	 * @param mobile
 	 * @throws ClientException
 	 */
-	@ApiOperation(value = "registered user", notes = "registered user")
+	@ApiOperation(value = "get phone code", notes = "get phone code")
 	@RequestMapping(value = "/v1/{mobile}/phoneCode", method = RequestMethod.POST)
 	public AddPhoneCodeResponse getPhoneCode(@PathVariable String mobile) throws ClientException {
 
@@ -88,6 +90,21 @@ public class UsersController {
 		PhoneCode phoneCode = userService.addPhoneCode(mobile, sendSmsResponse.getPhoneCode());
 		response.setCode(phoneCode.getCode());
 		return response;
+	}
+
+	/**
+	 * 验证验证码
+	 * 
+	 * @param mobile
+	 * @throws ClientException
+	 */
+	@ApiOperation(value = "check phone code", notes = "check phone code")
+	@RequestMapping(value = "/v1/{mobile}/checkPhoneCode", method = RequestMethod.GET)
+	public CheckPhoneCodeResponse checkPhoneCode(@PathVariable String mobile,
+			@Valid CheckPhoneCodeRequest checkPhoneCodeRequest) throws ClientException {
+
+		boolean result = userService.getPhoneCode(mobile, checkPhoneCodeRequest.getCode());
+		return new CheckPhoneCodeResponse(result);
 	}
 
 	/**
@@ -264,8 +281,8 @@ public class UsersController {
 		GetUserListResponse getUserResponse = new GetUserListResponse();
 
 		PageDto<GetUserDto> users = userService.getUsersPage(getUserListRequest.getPageNo(),
-
 				getUserListRequest.getPageSize(), getUserListRequest.getAddress(), getUserListRequest.getSex());
+
 		getUserResponse.pageNo = users.getPageNo();
 		getUserResponse.pageSize = users.getPageSize();
 		getUserResponse.totalCount = users.getTotalSize();

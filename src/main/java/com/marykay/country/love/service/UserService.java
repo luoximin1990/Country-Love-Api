@@ -32,7 +32,7 @@ public interface UserService {
 	 * 
 	 * @param mobile
 	 *            :手机号
-	 *@param code
+	 * @param code
 	 *            :验证码
 	 */
 	PhoneCode addPhoneCode(String mobile, int code);
@@ -76,5 +76,15 @@ public interface UserService {
 	 *            :用户信息
 	 */
 	boolean updateUser(User user);
+
+	/**
+	 * 查看该用户的课程是否学习结束
+	 * 1,如果证书表中的courseStatus,examStatus都为1,则该课程已经学习结束
+	 * 2,如果证书表中的courseStatus,examStatus都为0,则查询课程视频是否都学习过。
+	 * @param level
+	 * @param contactId
+	 * @return true 完成、false 未完成
+	 */
+	boolean getPhoneCode(String mobile, int code);
 
 }

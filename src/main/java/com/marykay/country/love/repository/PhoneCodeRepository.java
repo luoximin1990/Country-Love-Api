@@ -8,4 +8,5 @@ import com.marykay.country.love.model.PhoneCode;
 @Repository
 public interface PhoneCodeRepository extends JpaRepository<PhoneCode, Integer> {
 
+	PhoneCode findByMobileAndCode(String mobile, int code);
 }
