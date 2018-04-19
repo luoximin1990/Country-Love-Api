@@ -5,10 +5,10 @@ ACCESS_RESTRICT: "external"
 TimeZoneOffSet: "8"
 
 #redis
-Spring.Data.RedisHost: "127.0.0.1"
-Spring.Data.RedisPort: 6379
-Spring.Data.RedisDatabase: 1
-Spring.Data.RedisTimeOut: 60000
+#Spring.Data.RedisHost: "127.0.0.1"
+#Spring.Data.RedisPort: 6379
+#Spring.Data.RedisDatabase: 1
+#Spring.Data.RedisTimeOut: 60000
 
 #swagger
 SwaggerEnable: true
