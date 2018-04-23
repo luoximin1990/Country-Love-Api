@@ -7,7 +7,7 @@ apis for config management system.
 http://47.98.36.138:8080/Country-Love-Api-1.0-SNAPSHOT/swagger-ui.html#/  
 
 ## External URL
-http://47.98.36.138:8080  
+http://47.98.36.138:8080/Country-Love-Api-1.0-SNAPSHOT  
 
 ## TODO-webapi
 1. 用户头像/相册上传
