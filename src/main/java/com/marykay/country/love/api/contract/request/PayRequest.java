@@ -29,8 +29,8 @@ public class PayRequest {
 	@NotBlank
 	private String ordernum;
 
-	// 商户自定义客户号
-	private String orderuid;
+//	// 商户自定义客户号
+//	private String orderuid;
 
 	// 商品名称
 	private String goodname;
@@ -83,13 +83,13 @@ public class PayRequest {
 		this.ordernum = ordernum;
 	}
 
-	public String getOrderuid() {
-		return orderuid;
-	}
-
-	public void setOrderuid(String orderuid) {
-		this.orderuid = orderuid;
-	}
+//	public String getOrderuid() {
+//		return orderuid;
+//	}
+//
+//	public void setOrderuid(String orderuid) {
+//		this.orderuid = orderuid;
+//	}
 
 	public String getGoodname() {
 		return goodname;

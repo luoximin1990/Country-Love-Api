@@ -43,10 +43,11 @@ public class PayController {
 	@RequestMapping(value = "/v1/users/pay", method = RequestMethod.POST)
 	public PayResponse pay(@Valid PayRequest payRequest) {
 		PayResponse response = new PayResponse();
-		Boolean result = payService.pay(payRequest);
+		String orderUid = UUID.randomUUID().toString().replace("-", "");
+		Boolean result = payService.pay(payRequest, orderUid);
 		Order order = new Order();
 		if (result) {
-			order.setOrderUid(UUID.randomUUID().toString().replace("-", ""));
+			order.setOrderUid(orderUid);
 			order.setAmount(payRequest.getAmount());
 			order.setType(payRequest.getType());
 			order.setGoodname(payRequest.getGoodname());
@@ -73,7 +74,7 @@ public class PayController {
 
 		Order order = new Order();
 		order.setOrderUid(payNotifyRequest.getOrderuid());
-		order.setStatus(2);//支付完成
+		order.setStatus(2);// 支付完成
 		order.setCreatedBy(payNotifyRequest.getMobile());
 		order.setCreatedDate(new Date());
 		order.setUpdatedBy(payNotifyRequest.getMobile());

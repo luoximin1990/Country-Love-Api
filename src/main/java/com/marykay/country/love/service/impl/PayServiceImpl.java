@@ -24,17 +24,16 @@ public class PayServiceImpl implements PayService {
 
 	@Autowired
 	OrderRepository orderRepository;
-	
-	@Override
-	public boolean pay(PayRequest payRequest) {
 
-		String key = convert(payRequest);
+	@Override
+	public boolean pay(PayRequest payRequest, String orderUid) {
+
+		String key = convert(payRequest, orderUid);
 		OkHttpClient client = new OkHttpClient();
-		FormBody body = new FormBody.Builder().add("uid", uid)
-				.add("amount", String.valueOf(payRequest.getAmount())).add("type", String.valueOf(payRequest.getType()))
-				.add("notifyurl", payRequest.getNotifyurl()).add("returnurl", payRequest.getReturnurl())
-				.add("ordernum", payRequest.getOrdernum()).add("orderuid", payRequest.getOrderuid())
-				.add("goodname", payRequest.getGoodname()).add("key", key).build();
+		FormBody body = new FormBody.Builder().add("uid", uid).add("amount", String.valueOf(payRequest.getAmount()))
+				.add("type", String.valueOf(payRequest.getType())).add("notifyurl", payRequest.getNotifyurl())
+				.add("returnurl", payRequest.getReturnurl()).add("ordernum", payRequest.getOrdernum())
+				.add("orderuid", orderUid).add("goodname", payRequest.getGoodname()).add("key", key).build();
 		Request request = new Request.Builder().url("https://www.greenzf.com/api/index").post(body).build();
 		try {
 			Response response = client.newCall(request).execute();
@@ -49,11 +48,11 @@ public class PayServiceImpl implements PayService {
 		return false;
 	}
 
-	private String convert(PayRequest payRequest) {
+	private String convert(PayRequest payRequest, String orderUid) {
 
 		String key = payRequest.getGoodname() + payRequest.getType() + payRequest.getNotifyurl()
-				+ payRequest.getReturnurl() + payRequest.getOrdernum() + payRequest.getOrderuid()
-				+ payRequest.getAmount() + token + uid;
+				+ payRequest.getReturnurl() + payRequest.getOrdernum() + orderUid + payRequest.getAmount() + token
+				+ uid;
 		String keyNew = MD5.getMD5(key);
 		return keyNew;
 	}
@@ -66,8 +65,8 @@ public class PayServiceImpl implements PayService {
 
 	@Override
 	public boolean updateOrderStatus(Order order) {
-		return orderRepository.updateOrderStatus(order.getOrderUid(), order.getStatus(),
-				order.getCreatedBy(), order.getCreatedDate(), order.getUpdatedBy(), order.getUpdatedDate()) > 0;
+		return orderRepository.updateOrderStatus(order.getOrderUid(), order.getStatus(), order.getCreatedBy(),
+				order.getCreatedDate(), order.getUpdatedBy(), order.getUpdatedDate()) > 0;
 	}
 
 	@Override

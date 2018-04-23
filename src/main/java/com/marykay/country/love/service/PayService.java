@@ -9,12 +9,13 @@ public interface PayService {
 	 * 支付是否完成
 	 * 
 	 * @param payRequest
+	 * @param orderUid
 	 * @return true 支付完成、false 未完成
 	 */
-	boolean pay(PayRequest payRequest);
-	
+	boolean pay(PayRequest payRequest, String orderUid);
+
 	Order add(Order order);
-	
+
 	/**
 	 * 修改订单状态信息
 	 * 
@@ -22,7 +23,7 @@ public interface PayService {
 	 *            :用户信息
 	 */
 	boolean updateOrderStatus(Order user);
-	
+
 	/**
 	 * 查询订单状态
 	 * 
