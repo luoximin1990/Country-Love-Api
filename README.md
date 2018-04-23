@@ -1,16 +1,13 @@
-## SkinAnalyzerServices-CMS-API-CN
+## Country-Love-Api
 apis for config management system.
 * [swagger-ui](http://localhost:8080/swagger-ui.html)
 
 ## Swagger
 * API document can be open var this url  
-https://SkinAnalyzerServices-cms-api-cn-latest.dev.pcf.mkc.io/swagger-ui.html#!/  
+http://47.98.36.138:8080/Country-Love-Api-1.0-SNAPSHOT/swagger-ui.html#/  
 
 ## External URL
-1. DEV:    https://SkinAnalyzerServices-cms-api-cn-latest.dev.pcf.mkc.io  
-2. QA:     https://SkinAnalyzerServices-cms-api-cn-latest.qa.pcf.mkc.io  
-3. UAT:    https://SkinAnalyzerServices-cms-api-cn-latest.uat.pcf.mkc.io  
-4. PROD:   https://SkinAnalyzerServices-cms-api-cn-latest.prod.pcf.mkc.io  
+http://47.98.36.138:8080  
 
 ## TODO-webapi
 1. 用户头像/相册上传
