@@ -6,8 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import java.util.Date;
-
 @Entity(name = "j_position_village")
 @Table(name = "j_position_village")
 public class Village {
@@ -20,14 +18,6 @@ public class Village {
 	private long villageId;
 	// 村名称
 	private String villageName;
-	// 创建者
-	private String createdBy;
-	// 创建时间
-	private Date createdDate;
-	// 更新者
-	private String updatedBy;
-	// 更新时间
-	private Date updatedDate;
 
 	public int getId() {
 		return id;
@@ -59,37 +49,5 @@ public class Village {
 
 	public void setVillageName(String villageName) {
 		this.villageName = villageName;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	public Date getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public void setUpdatedDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
 	}
 }
