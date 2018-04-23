@@ -20,7 +20,7 @@ import java.util.Date;
  *
  * 备注:Demo工程编码采用UTF-8 国际短信发送请勿参照此DEMO
  */
-public class Test {
+public class TestSms {
 
 	// 产品名称:云通信短信API产品,开发者无需替换
 	static final String product = "Dysmsapi";

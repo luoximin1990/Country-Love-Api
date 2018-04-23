@@ -14,15 +14,17 @@ import okhttp3.Response;
 
 public class TestPay {
 
+	final static String uid = "7132805987119764";
+	final static String token = "waqm1c4bjv3srs3i0ertfar93yd1o1gb";
+	
 	public static void main(String[] args) {
 
-		String uid = "7132805987119764";
 		float amount = (float) 0.01;
 		int type = 1;
-		String notifyurl = "http://localhost:8080/v1/users/pays";
+		String notifyurl = "http://localhost:8080/v1/users/orders/update";
 		String returnurl = "https://pay_return";
 		String ordernum = "201804201757";
-		String orderuid = "yangliu";
+		String orderUid = UUID.randomUUID().toString().replace("-", "");
 		String goodname = "商品名称";
 		String token = "waqm1c4bjv3srs3i0ertfar93yd1o1gb";
 
@@ -32,11 +34,10 @@ public class TestPay {
 		payRequest.setNotifyurl(notifyurl);
 		payRequest.setReturnurl(returnurl);
 		payRequest.setOrdernum(ordernum);
-		payRequest.setOrderuid(orderuid);
 		payRequest.setGoodname(goodname);
-		String key = goodname + type + notifyurl + returnurl + ordernum + orderuid + amount + token + uid;
+		String key = goodname + type + notifyurl + returnurl + ordernum + orderUid + amount + token + uid;
 		String keyNew = MD5.getMD5(key);
-		pay(payRequest, keyNew);
+		pay(payRequest, keyNew, orderUid);
 
 //		 String greenpay_id = UUID.randomUUID().toString().replace("-","");
 //		 System.out.println(greenpay_id);
@@ -57,13 +58,13 @@ public class TestPay {
 //		 payNotify(payNotifyRequest);
 	}
 
-	public static void pay(PayRequest payRequest, String keyNew) {
+	public static void pay(PayRequest payRequest, String keyNew, String orderUid) {
 
 		OkHttpClient client = new OkHttpClient();
-		FormBody body = new FormBody.Builder().add("uid", "")
+		FormBody body = new FormBody.Builder().add("uid", uid)
 				.add("amount", String.valueOf(payRequest.getAmount())).add("type", String.valueOf(payRequest.getType()))
 				.add("notifyurl", payRequest.getNotifyurl()).add("returnurl", payRequest.getReturnurl())
-				.add("ordernum", payRequest.getOrdernum()).add("orderuid", payRequest.getOrderuid())
+				.add("ordernum", payRequest.getOrdernum()).add("orderuid", orderUid)
 				.add("goodname", payRequest.getGoodname()).add("key", keyNew).build();
 		Request request = new Request.Builder().url("https://www.greenzf.com/api/index").post(body).build();
 		try {
