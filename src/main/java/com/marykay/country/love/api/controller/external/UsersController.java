@@ -3,6 +3,7 @@ package com.marykay.country.love.api.controller.external;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,7 +73,7 @@ public class UsersController {
 
 		User users = userService.add(addUserRequest);
 		result.setCode(0);
-		result.setContent(users);
+		result.setContent(users.getUserName());
 		result.setMsg("注册成功!");
 		return result;
 	}
@@ -113,13 +114,12 @@ public class UsersController {
 	/**
 	 * 更新用户信息
 	 * 
-	 * @param file
 	 * @param updateUserRequest
 	 * @throws IOException
 	 */
 	@ApiOperation(value = "modifying user information", notes = "modifying user information")
 	@RequestMapping(value = { "/v1/users/information" }, method = RequestMethod.POST)
-	public BaseResult userUpdate(@RequestBody UpdateUserRequest updateUserRequest) throws IOException {
+	public BaseResult userUpdate(@RequestBody UpdateUserRequest updateUserRequest) {
 
 		BaseResult result = new BaseResult();
 
@@ -158,7 +158,7 @@ public class UsersController {
 	@ApiOperation(value = "upload users photo", notes = "upload users photo")
 	@RequestMapping(value = { "/v1/users/uploadPhoto" }, method = RequestMethod.POST)
 	public BaseResult photoUpload(@RequestParam(value = "image_file", required = false) MultipartFile file,
-			@Valid UploadUserRequest uploadUserRequest) throws IOException {
+			@Valid UploadUserRequest uploadUserRequest, ModelMap model) throws IOException {
 
 		UploadCommon uploadCommon = UploadCommon.getUploadCommonInstance();
 		FileDto fileDto = new FileDto();

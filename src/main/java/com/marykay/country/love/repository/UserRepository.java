@@ -51,8 +51,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 			@Param("createdDate") Date createdDate, @Param("updatedBy") String updatedBy,
 			@Param("updatedDate") Date updatedDate);
 
-	// @Query("select new com.marykay.country.love.model.User(u.id, u.userName) from
-	// user u where u.set = :sex limit 10")
-	// Page<User> selectUsers(@Param("sex") String sex, Pageable pageable);
 	Page<User> findAll(Specification<User> spec, Pageable pageable);
 }

@@ -2,18 +2,18 @@ package com.marykay.country.love.api.contract.request;
 
 public class AddUserRequest {
 
-	private String name;
+	private String userName;
 
 	private String mobile;
 
 	private String password;
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getMobile() {

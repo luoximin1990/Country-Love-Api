@@ -1,6 +1,7 @@
 package com.marykay.country.love.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -93,8 +94,12 @@ public class UserServiceImpl implements UserService {
 	public User add(AddUserRequest addUserRequest) {
 		User user = new User();
 		user.setMobile(addUserRequest.getMobile());
-		user.setUserName(addUserRequest.getName());
+		user.setUserName(addUserRequest.getUserName());
 		user.setNewPassword(addUserRequest.getPassword());
+		user.setCreatedBy(addUserRequest.getMobile());
+		user.setCreatedDate(user.getCreatedDate());
+		user.setUpdatedBy(addUserRequest.getMobile());
+		user.setUpdatedDate(new Date());
 		userRepository.save(user);
 		return user;
 	}

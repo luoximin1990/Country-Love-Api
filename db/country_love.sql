@@ -15,33 +15,29 @@ Date: 2018-03-14 11:26:19
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(255) DEFAULT NULL,
   `birthday` varchar(255) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `marital_status` int(11) NOT NULL,
   `mobile` varchar(255) DEFAULT NULL,
   `new_address` varchar(255) DEFAULT NULL,
   `old_address` varchar(255) DEFAULT NULL,
   `new_password` varchar(255) DEFAULT NULL,
+  `old_password` varchar(255) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
   `sex` varchar(255) DEFAULT NULL,
+  `marital_status` int(11) NOT NULL,
   `signin` varchar(255) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
-  `user_name` varchar(255) DEFAULT NULL,
-  `old_password` varchar(255) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
 
 CREATE TABLE `j_position_province` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `province_id` int(11) unsigned NOT NULL COMMENT '省份id、省份编号',
   `province_name` char(32) NOT NULL COMMENT '省份名称',
-  `created_by` varchar(255) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `province_id` (`province_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='省份数据库';
@@ -51,10 +47,6 @@ CREATE TABLE `j_position_city` (
   `province_id` int(10) unsigned NOT NULL COMMENT '地级市id',
   `city_id` bigint(20) unsigned NOT NULL COMMENT '县级市id',
   `city_name` char(64) NOT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `city_id` (`city_id`),
   KEY `province_id` (`province_id`)
@@ -65,10 +57,6 @@ CREATE TABLE `j_position_country` (
   `city_id` bigint(20) unsigned NOT NULL COMMENT '地级市id',
   `country_id` bigint(20) unsigned NOT NULL COMMENT '县级id',
   `country_name` char(64) NOT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `country_id` (`country_id`),
   KEY `city_id` (`city_id`)
@@ -80,10 +68,6 @@ CREATE TABLE `j_position_town` (
   `town_id` bigint(20) unsigned NOT NULL COMMENT '镇id',
   `town_name` char(64) NOT NULL,
   `country_name` varchar(255) DEFAULT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `town_id` (`town_id`),
   KEY `country_id` (`country_id`)
@@ -94,10 +78,6 @@ CREATE TABLE `j_position_village` (
   `town_id` bigint(20) unsigned NOT NULL COMMENT '镇id',
   `village_id` bigint(20) unsigned NOT NULL COMMENT '村id--唯一',
   `village_name` char(64) NOT NULL,
-  `created_by` varchar(255) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `updated_by` varchar(255) DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `village_id` (`village_id`),
   KEY `town_id` (`town_id`)
