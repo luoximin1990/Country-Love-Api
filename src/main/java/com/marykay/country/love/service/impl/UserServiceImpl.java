@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 	private GetUserDto convent(User user) {
 		GetUserDto getUserDto = new GetUserDto();
 		getUserDto.setId(user.getId());
-		getUserDto.setName(user.getUserName());
+		getUserDto.setUserName(user.getUserName());
 		getUserDto.setBirthday(user.getBirthday());
 		getUserDto.setMobile(user.getMobile());
 		getUserDto.setMaritalStatus(user.getMaritalStatus());

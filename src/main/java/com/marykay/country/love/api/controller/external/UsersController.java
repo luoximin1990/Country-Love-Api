@@ -124,7 +124,7 @@ public class UsersController {
 
 		User user = new User();
 		user.setId(updateUserRequest.getId());
-		user.setUserName(updateUserRequest.getName());
+		user.setUserName(updateUserRequest.getUserName());
 		user.setSex(updateUserRequest.getSex());
 		user.setBirthday(updateUserRequest.getBirthday());
 		user.setSignin(updateUserRequest.getSignin());
@@ -132,9 +132,9 @@ public class UsersController {
 		user.setNewAddress(updateUserRequest.getNewAddress());
 		user.setOldAddress(updateUserRequest.getOldAddress());
 		user.setMaritalStatus(updateUserRequest.getMaritalStatus());
-		user.setCreatedBy(updateUserRequest.getName());
+		user.setCreatedBy(updateUserRequest.getUserName());
 		user.setCreatedDate(new Date());
-		user.setUpdatedBy(updateUserRequest.getName());
+		user.setUpdatedBy(updateUserRequest.getUserName());
 		user.setUpdatedDate(new Date());
 
 		if (userService.updateUser(user)) {

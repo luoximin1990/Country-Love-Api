@@ -6,7 +6,7 @@ public class UpdateUserRequest {
 
 	private int id;
 
-	private String name;
+	private String userName;
 
     @Max(value= 2,message = "性别：1 男，2 女")
     private String sex;
@@ -29,11 +29,11 @@ public class UpdateUserRequest {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getSex() {
 		return sex;
