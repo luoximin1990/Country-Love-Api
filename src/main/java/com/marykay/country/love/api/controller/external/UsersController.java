@@ -176,6 +176,7 @@ public class UsersController {
 
 		if (userService.upload(user)) {
 			result.setCode(0);
+			result.setContent(fileDto.getFile_name());
 			result.setMsg("修改成功");
 			return result;
 		}
