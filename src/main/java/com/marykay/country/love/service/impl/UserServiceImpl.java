@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 	public boolean updateUser(User user) {
 		return userRepository.updateUser(user.getId(), user.getUserName(), user.getSex(), user.getBirthday(),
 				user.getSignin(), user.getRemark(), user.getNewAddress(), user.getOldAddress(), user.getMaritalStatus(),
-				user.getCreatedBy(), user.getCreatedDate(), user.getUpdatedBy(), user.getUpdatedDate()) > 0;
+				user.getUpdatedBy(), user.getUpdatedDate()) > 0;
 	}
 
 	@Override
@@ -92,15 +92,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User add(AddUserRequest addUserRequest) {
-		User user = new User();
-		user.setMobile(addUserRequest.getMobile());
+		User user =  new User();
+		userRepository.saveUser(addUserRequest.getUserName(), addUserRequest.getMobile(),
+				addUserRequest.getPassword(), addUserRequest.getMobile(), new Date(), addUserRequest.getMobile(),
+				new Date());
 		user.setUserName(addUserRequest.getUserName());
-		user.setNewPassword(addUserRequest.getPassword());
-		user.setCreatedBy(addUserRequest.getMobile());
-		user.setCreatedDate(user.getCreatedDate());
-		user.setUpdatedBy(addUserRequest.getMobile());
-		user.setUpdatedDate(new Date());
-		userRepository.save(user);
+		user.setMobile(addUserRequest.getMobile());
 		return user;
 	}
 

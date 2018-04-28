@@ -35,7 +35,10 @@ public class UploadCommon {
 	public void uploadImageCom(MultipartFile multipartFile, HttpServletRequest request, FileDto fileDto)
 			throws IOException {
 
-		String filePath = "/Users/yangliu/Desktop/home/countrylove/pages/imgs/";
+//		String filePath = "/Users/yangliu/Desktop/home/countrylove/pages/imgs/";
+		// 服务器图片地址
+		String filePath = "C:\\CountryLove\\pages\\imgs";
+		
 		String file_name = null;
 		try {
 			file_name = saveImg(multipartFile, filePath);
@@ -62,7 +65,7 @@ public class UploadCommon {
             file.mkdirs();
         }
         FileInputStream fileInputStream = (FileInputStream) multipartFile.getInputStream();
-        String fileName = UUID.randomUUID().toString().replace("-", "") + ".png";
+        String fileName = UUID.randomUUID().toString().replace("-", "") + ".jpg";
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path + File.separator + fileName));
         byte[] bs = new byte[1024];
         int len;

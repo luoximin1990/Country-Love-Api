@@ -3,7 +3,6 @@ package com.marykay.country.love.api.controller.external;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -133,9 +132,9 @@ public class UsersController {
 		user.setNewAddress(updateUserRequest.getNewAddress());
 		user.setOldAddress(updateUserRequest.getOldAddress());
 		user.setMaritalStatus(updateUserRequest.getMaritalStatus());
-		user.setCreatedBy(String.valueOf(updateUserRequest.getId()));
+		user.setCreatedBy(updateUserRequest.getName());
 		user.setCreatedDate(new Date());
-		user.setUpdatedBy(String.valueOf(updateUserRequest.getId()));
+		user.setUpdatedBy(updateUserRequest.getName());
 		user.setUpdatedDate(new Date());
 
 		if (userService.updateUser(user)) {
@@ -158,7 +157,7 @@ public class UsersController {
 	@ApiOperation(value = "upload users photo", notes = "upload users photo")
 	@RequestMapping(value = { "/v1/users/uploadPhoto" }, method = RequestMethod.POST)
 	public BaseResult photoUpload(@RequestParam(value = "image_file", required = false) MultipartFile file,
-			@Valid UploadUserRequest uploadUserRequest, ModelMap model) throws IOException {
+			@Valid UploadUserRequest uploadUserRequest) throws IOException {
 
 		UploadCommon uploadCommon = UploadCommon.getUploadCommonInstance();
 		FileDto fileDto = new FileDto();
@@ -169,7 +168,7 @@ public class UsersController {
 
 		User user = new User();
 		user.setId(uploadUserRequest.getId());
-		user.setPhoto(fileDto.getFile_url());
+		user.setPhoto(fileDto.getFile_name());
 		user.setCreatedBy(String.valueOf(uploadUserRequest.getId()));
 		user.setCreatedDate(new Date());
 		user.setUpdatedBy(String.valueOf(uploadUserRequest.getId()));
@@ -203,6 +202,7 @@ public class UsersController {
 
 		if (user.getNewPassword().equals(getUserLoginRequest.getPassword())) {
 			result.setCode(0);
+			result.setContent(user);
 			result.setMsg("登陆成功");
 			return result;
 		}

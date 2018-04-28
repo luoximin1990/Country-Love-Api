@@ -17,6 +17,20 @@ import com.marykay.country.love.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+	@Transactional
+	@Modifying
+	@Query(value = "insert into user(user_name, mobile, new_password, created_by, created_date, updated_by, updated_date) values (?,?,?,?,?,?,?)", nativeQuery=true)
+	int saveUser(@Param("userName") String userName, @Param("mobile") String mobile,
+			@Param("newPassword") String newPassword, @Param("createdBy") String createdBy,
+			@Param("createdDate") Date createdDate, @Param("updatedBy") String updatedBy,
+			@Param("updatedDate") Date updatedDate);
+
+//	@Modifying
+//	@Query(value = "INSERT INTO user (userName, mobile, newPassword) VALUES (?, ?, ?)", nativeQuery=true)
+//	void saveTest(@Param("userName") String userName, @Param("mobile") String mobile,
+//			@Param("newPassword") String newPassword);
+	
+	
 	User findByMobile(String mobile);
 
 	User findById(int id);
@@ -36,12 +50,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Transactional
 	@Modifying
-	@Query("UPDATE user t SET t.userName = :userName,t.sex = :sex,t.birthday = :birthday,t.signin = :signin,t.remark = :remark,t.newAddress = :newAddress,t.oldAddress = :oldAddress,t.maritalStatus = :maritalStatus,t.createdBy = :createdBy, t.createdDate = :createdDate, t.updatedBy = :updatedBy, t.updatedDate = :updatedDate WHERE t.id=:id ")
+	@Query("UPDATE user t SET t.userName = :userName,t.sex = :sex,t.birthday = :birthday,t.signin = :signin,t.remark = :remark,t.newAddress = :newAddress,t.oldAddress = :oldAddress,t.maritalStatus = :maritalStatus, t.updatedBy = :updatedBy, t.updatedDate = :updatedDate WHERE t.id=:id ")
 	int updateUser(@Param("id") int id, @Param("userName") String userName, @Param("sex") String sex,
 			@Param("birthday") String birthday, @Param("signin") String signin, @Param("remark") String remark,
 			@Param("newAddress") String newAddress, @Param("oldAddress") String oldAddress,
-			@Param("maritalStatus") int maritalStatus, @Param("createdBy") String createdBy,
-			@Param("createdDate") Date createdDate, @Param("updatedBy") String updatedBy,
+			@Param("maritalStatus") int maritalStatus, @Param("updatedBy") String updatedBy,
 			@Param("updatedDate") Date updatedDate);
 
 	@Transactional
