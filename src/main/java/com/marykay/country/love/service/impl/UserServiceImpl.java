@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -133,7 +134,10 @@ public class UserServiceImpl implements UserService {
 		// 分页信息
 		Pageable pageable = new PageRequest(pageNo - 1, pageSize); // 页码：前端从1开始，jpa从0开始，做个转换
 		// 查询
-		Page<User> userList = this.userRepository.findAll(where(address, sex), pageable);
+		User user =new User();
+		user.setNewAddress(address);
+		user.setSex(sex);
+		Page<User> userList = this.findPageList(pageNo,pageSize,user);
 		PageDto<GetUserDto> pageDto = new PageDto<GetUserDto>();
 		pageDto.setPageNo(pageNo);
 		pageDto.setPageSize(pageSize);
@@ -160,21 +164,58 @@ public class UserServiceImpl implements UserService {
 	/**
 	 * 条件查询时动态组装条件
 	 */
-	private Specification<User> where(final String address, final String sex) {
+	private Specification<User> where(String newAddress, String sex) {
 		return new Specification<User>() {
 			@Override
 			public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				List<Predicate> predicates = new ArrayList<>(); // 所有的断言
-				if (!"".equals(address) && address != null) { // 添加断言
-					Predicate preName = cb.like(root.<String>get("newAddress"), "%" + address + "%");
+				if (!"".equals(newAddress) && newAddress != null) { // 添加断言
+					Predicate preName = cb.like(root.get("newAddress"), "%" + newAddress + "%");
 					predicates.add(preName);
 				}
 				if (!"".equals(sex) && sex != null) { // 添加断言
-					Predicate preName = cb.equal(root.<String>get("sex"), sex);
+					Predicate preName = cb.equal(root.get("sex"), sex);
 					predicates.add(preName);
 				}
 				return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
 			}
 		};
 	}
+	
+    /** 
+     * 分页列表模糊 查询 
+     *  
+     * @param page 
+     * @param rows 
+     * @param user 
+     * @return 
+     */  
+    public Page<User> findPageList(Integer page,Integer rows,User user){  
+        page = (page == null) ? 1 : page;  
+        rows = (rows == null) ? 10 : rows;  
+  
+        Pageable pageable = new PageRequest(page - 1, rows, Direction.DESC,"createdDate");//id倒序排列  
+        return (Page<User>) userRepository.findAll(new Specification() {  
+            @Override  
+            public Predicate toPredicate(Root root, CriteriaQuery query,  
+                                         CriteriaBuilder cb) {  
+  
+                  
+                //操作对象 模糊查询  
+                if (user.getNewAddress() != null && !"".equals(user.getNewAddress())) {  
+                    Predicate objects ;  
+                    objects = cb.like(root.get("newAddress"), "%" + user.getNewAddress() + "%");  
+                    query.where(objects);  
+                }  
+                //操作类型  精确查询  
+                if (user.getSex() != null && !"".equals(user.getSex())) {  
+                    Predicate type ;  
+                    type = cb.equal(root.get("sex"), user.getSex());  
+                    query.where(type);  
+                }  
+                  
+                return null;  
+            };  
+        }, pageable);  
+    };  
 }

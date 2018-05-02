@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,7 +16,7 @@ import org.springframework.data.domain.Pageable;
 import com.marykay.country.love.model.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User>{
 
 	@Transactional
 	@Modifying
@@ -64,5 +65,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 			@Param("createdDate") Date createdDate, @Param("updatedBy") String updatedBy,
 			@Param("updatedDate") Date updatedDate);
 
-	Page<User> findAll(Specification<User> spec, Pageable pageable);
+	Page<User> findByNewAddressLike(Specification<User> spec, Pageable pageable);
 }
