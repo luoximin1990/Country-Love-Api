@@ -76,6 +76,6 @@ public class SmsUtil {
 	}
 
 	public void setCode() {
-		code = (int) (Math.random() * 9999) + 1000; // 每次调用生成一次四位数的随机数
+		code = (int) (Math.random() * 9000) + 1000; // 每次调用生成一次四位数的随机数
 	}
 }
