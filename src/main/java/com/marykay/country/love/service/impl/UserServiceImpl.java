@@ -10,9 +10,13 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -134,10 +138,16 @@ public class UserServiceImpl implements UserService {
 		// 分页信息
 		Pageable pageable = new PageRequest(pageNo - 1, pageSize); // 页码：前端从1开始，jpa从0开始，做个转换
 		// 查询
-		User user =new User();
-		user.setNewAddress(address);
-		user.setSex(sex);
-		Page<User> userList = this.findPageList(pageNo,pageSize,user);
+		// function 1
+//		Page<User> userList = this.userRepository.findAll(where(address,sex), pageable);
+		// function 2
+//		User user =new User();
+//		user.setNewAddress(address);
+//		user.setSex(sex);
+//		Page<User> userList2 = this.findPageList(pageNo,pageSize,user);
+		
+		// function 3
+		Page<User> userList = this.findUserList(address, sex,  pageSize,  pageNo);
 		PageDto<GetUserDto> pageDto = new PageDto<GetUserDto>();
 		pageDto.setPageNo(pageNo);
 		pageDto.setPageSize(pageSize);
@@ -217,5 +227,32 @@ public class UserServiceImpl implements UserService {
                 return null;  
             };  
         }, pageable);  
-    };  
+    }; 
+
+    /** 
+     * 首页按住址和性别分页模糊查询
+     *  
+     * @param address
+     * @param sex
+     * @param pageSize
+     * @param pageNo
+     * @return 
+     */
+    public Page<User> findUserList(String address, String sex, int pageSize, int pageNo) {
+		// 创建查询条件数据对象
+		User user = new User();
+		user.setNewAddress(address);
+		user.setSex(sex);
+
+		Sort sort = new Sort(Direction.DESC, "createdDate");
+		PageRequest pageRequest = new PageRequest(pageNo - 1, pageSize, sort);
+
+		// 创建比较对象，对字符串模糊查询
+		ExampleMatcher matcher = ExampleMatcher.matching().withStringMatcher(StringMatcher.CONTAINING);
+
+		// 查询
+		Page<User> users = userRepository.findAll(Example.of(user, matcher), pageRequest);
+
+		return users;
+	}
 }
