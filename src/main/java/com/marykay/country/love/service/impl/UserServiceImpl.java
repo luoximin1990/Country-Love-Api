@@ -139,15 +139,15 @@ public class UserServiceImpl implements UserService {
 		Pageable pageable = new PageRequest(pageNo - 1, pageSize); // 页码：前端从1开始，jpa从0开始，做个转换
 		// 查询
 		// function 1
-//		Page<User> userList = this.userRepository.findAll(where(address,sex), pageable);
+		Page<User> userList = this.userRepository.findAll(where(address,sex), pageable);
 		// function 2
-//		User user =new User();
+//		User user = new User();
 //		user.setNewAddress(address);
 //		user.setSex(sex);
 //		Page<User> userList2 = this.findPageList(pageNo,pageSize,user);
 		
 		// function 3
-		Page<User> userList = this.findUserList(address, sex,  pageSize,  pageNo);
+//		Page<User> userList = this.findUserList(address, sex,  pageSize,  pageNo);
 		PageDto<GetUserDto> pageDto = new PageDto<GetUserDto>();
 		pageDto.setPageNo(pageNo);
 		pageDto.setPageSize(pageSize);
@@ -179,10 +179,10 @@ public class UserServiceImpl implements UserService {
 			@Override
 			public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				List<Predicate> predicates = new ArrayList<>(); // 所有的断言
-				if (!"".equals(newAddress) && newAddress != null) { // 添加断言
-					Predicate preName = cb.like(root.get("newAddress"), "%" + newAddress + "%");
-					predicates.add(preName);
-				}
+//				if (!"".equals(newAddress) && newAddress != null) { // 添加断言
+//					Predicate preName = cb.like(root.get("newAddress"), "%" + newAddress + "%");
+//					predicates.add(preName);
+//				}
 				if (!"".equals(sex) && sex != null) { // 添加断言
 					Predicate preName = cb.equal(root.get("sex"), sex);
 					predicates.add(preName);

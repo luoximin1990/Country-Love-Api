@@ -65,5 +65,5 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
 			@Param("createdDate") Date createdDate, @Param("updatedBy") String updatedBy,
 			@Param("updatedDate") Date updatedDate);
 
-	Page<User> findByNewAddressLike(Specification<User> spec, Pageable pageable);
+	Page<User> findAll(Specification<User> spec, Pageable pageable);
 }
