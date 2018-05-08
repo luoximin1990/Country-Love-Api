@@ -14,7 +14,7 @@ public class GetUserListRequest {
 
 	private String address;
 
-	private String sex;
+	private int sex;
 
 	public Integer getPageNo() {
 		return pageNo;
@@ -40,11 +40,11 @@ public class GetUserListRequest {
 		this.address = address;
 	}
 
-	public String getSex() {
+	public int getSex() {
 		return sex;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(int sex) {
 		this.sex = sex;
 	}
 

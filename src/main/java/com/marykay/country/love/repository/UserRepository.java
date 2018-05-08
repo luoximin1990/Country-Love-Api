@@ -52,7 +52,7 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
 	@Transactional
 	@Modifying
 	@Query("UPDATE user t SET t.userName = :userName,t.sex = :sex,t.birthday = :birthday,t.signin = :signin,t.remark = :remark,t.newAddress = :newAddress,t.oldAddress = :oldAddress,t.maritalStatus = :maritalStatus, t.updatedBy = :updatedBy, t.updatedDate = :updatedDate WHERE t.id=:id ")
-	int updateUser(@Param("id") int id, @Param("userName") String userName, @Param("sex") String sex,
+	int updateUser(@Param("id") int id, @Param("userName") String userName, @Param("sex") int sex,
 			@Param("birthday") String birthday, @Param("signin") String signin, @Param("remark") String remark,
 			@Param("newAddress") String newAddress, @Param("oldAddress") String oldAddress,
 			@Param("maritalStatus") int maritalStatus, @Param("updatedBy") String updatedBy,

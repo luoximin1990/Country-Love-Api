@@ -17,7 +17,7 @@ public interface UserService {
 	 */
 	User findById(int id);
 
-	PageDto<GetUserDto> getUsersPage(int pageNo, int pageSize, String address, String sex);
+	PageDto<GetUserDto> getUsersPage(int pageNo, int pageSize, String address, int sex);
 
 	/**
 	 * 用户注册

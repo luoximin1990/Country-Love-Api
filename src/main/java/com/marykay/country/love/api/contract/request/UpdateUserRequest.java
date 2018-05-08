@@ -8,8 +8,8 @@ public class UpdateUserRequest {
 
 	private String userName;
 
-    @Max(value= 2,message = "性别：1 男，2 女")
-    private String sex;
+	@Max(value= 2,message = "性别：1 男，2 女")
+    private int sex;
 
     private String birthday;
 
@@ -35,10 +35,10 @@ public class UpdateUserRequest {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getSex() {
+	public int getSex() {
 		return sex;
 	}
-	public void setSex(String sex) {
+	public void setSex(int sex) {
 		this.sex = sex;
 	}
 	public String getBirthday() {

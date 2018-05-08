@@ -18,7 +18,7 @@ public class User {
 	// 姓名
 	private String userName;
 	// 性别
-	private String sex;
+	private int sex;
 	// 手机号
 	private String mobile;
 	// 新密码
@@ -60,10 +60,10 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getSex() {
+	public int getSex() {
 		return sex;
 	}
-	public void setSex(String sex) {
+	public void setSex(int sex) {
 		this.sex = sex;
 	}
 	public String getMobile() {

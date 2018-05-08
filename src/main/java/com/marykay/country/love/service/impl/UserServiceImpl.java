@@ -134,7 +134,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public PageDto<GetUserDto> getUsersPage(int pageNo, int pageSize, String address, String sex) {
+	public PageDto<GetUserDto> getUsersPage(int pageNo, int pageSize, String address, int sex) {
 		// 分页信息
 		Pageable pageable = new PageRequest(pageNo - 1, pageSize); // 页码：前端从1开始，jpa从0开始，做个转换
 		// 查询
@@ -174,16 +174,16 @@ public class UserServiceImpl implements UserService {
 	/**
 	 * 条件查询时动态组装条件
 	 */
-	private Specification<User> where(String newAddress, String sex) {
+	private Specification<User> where(String newAddress, int sex) {
 		return new Specification<User>() {
 			@Override
 			public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				List<Predicate> predicates = new ArrayList<>(); // 所有的断言
-//				if (!"".equals(newAddress) && newAddress != null) { // 添加断言
-//					Predicate preName = cb.like(root.get("newAddress"), "%" + newAddress + "%");
-//					predicates.add(preName);
-//				}
-				if (!"".equals(sex) && sex != null) { // 添加断言
+				if (!"".equals(newAddress) && newAddress != null) { // 添加断言
+					Predicate preName = cb.like(root.get("newAddress"), "%" + newAddress + "%");
+					predicates.add(preName);
+				}
+				if (sex != 0) { // 添加断言
 					Predicate preName = cb.equal(root.get("sex"), sex);
 					predicates.add(preName);
 				}
@@ -218,7 +218,7 @@ public class UserServiceImpl implements UserService {
                     query.where(objects);  
                 }  
                 //操作类型  精确查询  
-                if (user.getSex() != null && !"".equals(user.getSex())) {  
+                if (user.getSex() != 0 && !"".equals(user.getSex())) {  
                     Predicate type ;  
                     type = cb.equal(root.get("sex"), user.getSex());  
                     query.where(type);  
@@ -238,7 +238,7 @@ public class UserServiceImpl implements UserService {
      * @param pageNo
      * @return 
      */
-    public Page<User> findUserList(String address, String sex, int pageSize, int pageNo) {
+    public Page<User> findUserList(String address, int sex, int pageSize, int pageNo) {
 		// 创建查询条件数据对象
 		User user = new User();
 		user.setNewAddress(address);

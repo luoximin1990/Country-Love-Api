@@ -305,8 +305,8 @@ public class UsersController {
 	 * @param sex
 	 */
 	@ApiOperation(value = "getting dashboard users", notes = "getting dashboard users")
-	@RequestMapping(value = "/v1/users/query", produces = { "application/json;charset=UTF-8" }, method = RequestMethod.GET)
-	public GetUserListResponse getUsers(@Valid GetUserListRequest getUserListRequest) {
+	@RequestMapping(value = "/v1/users/query/get", produces = { "application/json;charset=UTF-8" }, method = RequestMethod.POST)
+	public GetUserListResponse getUsers(@RequestBody GetUserListRequest getUserListRequest) {
 
 		GetUserListResponse getUserResponse = new GetUserListResponse();
 
