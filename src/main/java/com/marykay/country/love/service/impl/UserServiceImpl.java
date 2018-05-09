@@ -111,6 +111,10 @@ public class UserServiceImpl implements UserService {
 		PhoneCode phoneCode = new PhoneCode();
 		phoneCode.setMobile(mobile);
 		phoneCode.setCode(code);
+		phoneCode.setCreatedBy(mobile);
+		phoneCode.setCreatedDate(new Date());
+		phoneCode.setUpdatedBy(mobile);
+		phoneCode.setUpdatedDate(new Date());
 		phoneCodeRepository.save(phoneCode);
 		return phoneCode;
 	}
